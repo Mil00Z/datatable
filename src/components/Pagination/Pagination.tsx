@@ -1,12 +1,17 @@
-
-const Pagination = ({counterPages,pageIndex,setPageIndex}) =>  {
+interface PaginationProps {
+  counterPages: number[];
+  pageIndex: number;
+  setPageIndex: Function
+}
+const Pagination = ({counterPages,pageIndex,setPageIndex}: PaginationProps) =>  {
 
  
-  function handleClick(pageNumber) {
+  function handleClick(pageNumber:string){ {
 
-    setPageIndex((pageIndex) => parseInt(pageNumber));
+    setPageIndex(parseInt(pageNumber));
    
   }
+}
 
 
 return (

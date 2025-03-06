@@ -2,8 +2,12 @@ import {useState,useEffect} from 'react';
 
 import Pagination from '../../components/Pagination/Pagination';
 
+interface DataTableProps {
+  /** Datasets to manage*/ 
+  initialDatas: object[];
+}
 
-const DataTable = ({initialDatas}) => {
+const DataTable = ({initialDatas} : DataTableProps) => {
 
   const [filteredDatas,setFilteredDatas] = useState(initialDatas);
   const [sortingDatas,setSortingDatas] = useState('asc');
@@ -17,21 +21,21 @@ const DataTable = ({initialDatas}) => {
   const colLabels = Object.keys(initialDatas[0]);
 
 // Get Number of Element by Page
-  function entriesByPage(inputValue){
+  function entriesByPage(inputValue:string){
 
-    let entry = parseInt(inputValue);
+    const entry = parseInt(inputValue);
 
     // Record number of Element by Pages 
-    setElementsPerPage((elementsPerPage) => entry);
+    setElementsPerPage(entry);
 
     //Record Array of Pagination
-    setCounterPages((counterPages) => listOfPages(entry))
+    setCounterPages(listOfPages(entry))
     
   
   }
 
 // Create List of Pagination
-  function listOfPages(value){
+  function listOfPages(value:number){
 
     let numberOfPages = initialDatas.length / value;
 
@@ -41,7 +45,7 @@ const DataTable = ({initialDatas}) => {
 
     }
 
-    let links=[];
+    const links=[];
     for (let i = 1; i <= numberOfPages; i++) {
       links.push(i);
     }
@@ -50,7 +54,7 @@ const DataTable = ({initialDatas}) => {
   }
 
 // Filter by Lexical Order
-  function lexicalFilter(value) {
+  function lexicalFilter(value:string) {
     
     let sortedDatas;
 
@@ -69,7 +73,7 @@ const DataTable = ({initialDatas}) => {
   }
 
 // Global Search by Lexical
-  function globalSearch(input){
+  function globalSearch(input:string){
 
   
     if(filteredDatas.length === 0 || input === ''){
@@ -94,12 +98,11 @@ const DataTable = ({initialDatas}) => {
   useEffect(() => {
 
     //Update Local State of Datas
-    setFilteredDatas((filteredDatas) => {
-
+    setFilteredDatas(() => {
       return initialDatas.slice((pageIndex - 1) * elementsPerPage, elementsPerPage * pageIndex);
     });
-   
-  },[elementsPerPage,pageIndex])
+
+  }, [elementsPerPage, pageIndex]);
 
 
 
