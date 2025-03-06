@@ -1,54 +1,163 @@
-# React + TypeScript + Vite
+# My React Datatable Plugin
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple Clone of Datable JQuery Plugin for React applications.
 
-Currently, two official plugins are available:
+## Creation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### package.json
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
+```json
+{
+  "name": "milooz-datatable-react-plugin", 
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist"
   ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
+  "publishConfig": {
+    "access": "public"
   },
-})
+  "scripts": {
+    ...
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    ...
+  }
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install milooz-datatable-react-plugin
+OR
+pnpm install milooz-datatable-react-plugin
 ```
+
+## Usage
+
+#### Create Datas Folder in `myProject\src\`
+```bash
+mkdir datas
+```
+#### Import Datatable Component & Datas File
+```jsx
+//App.jsx
+import { Datatable } from 'milooz-datatable-react-plugin';
+import mock from '../datas/mock.json';
+
+function App() {
+  return (
+    <h1 className="text-3xl text-black font-bold text-center flex justify-center">
+        Simple Clone of DataTables
+    </h1>
+    <DataTable initialDatas={mock} />
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| mock | array | initialDatas | Datasets to display |
+
+
+#### Sub Component in Plugin ?? => Pagination 
+```jsx
+//file.jsx
+
+function SubComponent() {
+  return (
+    <Pagination 
+      counterPages={counterPages} 
+      pageIndex={pageIndex} 
+      setPageIndex={setPageIndex} 
+    />
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| counterPages | array | [] | Array of Pagination Element |
+| PageIndex | number | 1 | Current Index of Page |
+| setPageIndex | function |  ❌  | Setter of Page Index |
+
+
+#### UI Initials Settings
+```css
+@import "tailwindcss";
+
+/* INIT */
+:root{
+  --main-color:rgb(202 138 4);
+  --white-color:#FFF;
+  --black-color:#000;
+  --background:rgb(255 255 255);
+  --body-font-size:1.5rem;
+  --body-font-family:Arial, Helvetica, sans-serif;
+  --bold-weight:700;
+  --radius:5px;
+  --container:75dvw;
+}
+
+#root {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+body {
+  font-family: var(--body-font-family);
+  font-size:var(--body-font-size);
+  color: var(--black-color);
+  background: var(--background);
+}
+
+a {
+  text-decoration: none;
+}
+
+/* DataTable */
+thead th{
+  cursor:pointer;
+}
+
+
+/* Pagination */
+.pagination-link{
+  --sizes:25px;
+  --radius:50%;
+  width:var(--sizes);
+  height:var(--sizes);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:5px;
+  color:var(--main-color);
+  font-size:.9rem;
+  font-weight: var(--bold-weight);
+  text-align: center;
+  border-radius: var(--radius);
+  transition:all .25s ease-in-out;
+}
+
+.active{
+  background:var(--main-color);
+  color:var(--white-color);
+}
+
+```
+
+## License
+
+MIT
