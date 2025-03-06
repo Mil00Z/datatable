@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+
+#root {
+  max-width: 75dvw;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+
+/* INIT */
+:root{
+  --main-color:rgb(202 138 4);
+  --white-color:#FFF;
+  --black-color:#000;
+  --background:rgb(255 255 255);
+  --body-font-size:1.5rem;
+  --body-font-family:Arial, Helvetica, sans-serif;
+  --bold-weight:700;
+  --radius:5px;
+}
+
+body {
+  font-family: var(--body-font-family);
+  font-size:var(--body-font-size);
+  color: var(--black-color);
+  background: var(--background);
+  
+}
+a {
+  text-decoration: none;
+}
+
+/* Specs of Container */
+.datas-container {
+  --table-spacing: 2rem;
+  background: var(--background);
+  color: var(--color-white);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  padding: var(--table-spacing);
+}
+
+.searching {
+  margin-left:auto;
+}
+
+/* DataTable */
+.data-table{
+  
+  display:flex;
+  flex-direction: column;
+  min-height:50vh;
+  padding:var(--table-spacing);
+}
+
+
+thead th{
+  cursor:pointer
+}
+
+.table-row {
+  display:block;
+ }
+
+ .table-cell,
+ .table-label{
+  width:100px;
+  padding:.55rem;
+  text-align: center;
+  color:var(--white-color);
+  font-weight: var(--bold-weight);
+ }
+
+
+/* Pagination */
+.pagination{
+  --gap:.75rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-inline: 2rem;
+  column-gap: var(--gap);
+}
+
+.pagination-link{
+  --sizes:25px;
+  --radius:50%;
+  width:var(--sizes);
+  height:var(--sizes);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:5px;
+  color:var(--main-color);
+  font-size:.9rem;
+  font-weight: var(--bold-weight);
+  text-align: center;
+  border-radius: var(--radius);
+  transition:all .25s ease-in-out;
+}
+
+.active{
+  background:var(--main-color);
+  color:var(--white-color);
+}
+
