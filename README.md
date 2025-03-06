@@ -19,16 +19,19 @@ A simple Clone of Datable JQuery Plugin for React applications.
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    ...
+  "scripts":{
+  "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
+
   "peerDependencies": {
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
   },
-  "devDependencies": {
-    ...
-  }
+  "dependencies": {
+  "tailwind": "^2.2.19"
+}
 }
 ```
 
