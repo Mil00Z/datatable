@@ -106,11 +106,11 @@ const DataTable = ({initialDatas}) => {
   return(
     <>
       
-      <div className="top my-4">
+      <div className="top flex items-center py-2 my-4">
       
         <div className="numbering flex flex-row items-center">
 
-          <select className="p-2 bg-gray-800 text-base text-white" onChange={(event)=>{entriesByPage(event.target.value)}}>
+          <select className="p-2 bg-gray-800 text-base text-white" onChange={(event)=>{entriesByPage(event.target.value)}} name="dt-length">
               <option defaultValue="" value={initialDatas.length}>All</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -124,7 +124,7 @@ const DataTable = ({initialDatas}) => {
           
         </div>
 
-        <div className="searching flex flex-row items-center">
+        <div className="searching flex flex-row items-center ml-auto">
           <label htmlFor="search" className="px-2 mx-2 font-semibold text-black text-base">Search:</label>
           <input type="search" id="search" className="p-2 bg-gray-800 text-base text-white" placeholder="votre recherche" onChange={(event)=>{globalSearch(event.target.value)}} />
         </div>
@@ -160,7 +160,7 @@ const DataTable = ({initialDatas}) => {
               ) : (
                 <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 border border-gray-800">
                   <>
-                    <td className="bg-red-600 px-6 py-4 text-white">
+                    <td className="px-6 py-4 bg-red-600  text-white">
                       Aucun résultat trouvé
                     </td>
                   </>
@@ -171,9 +171,9 @@ const DataTable = ({initialDatas}) => {
       </table>
 
 
-      <div className="bottom px-5 my-2 flex justify-between items-center">
+      <div className="bottom my-2 flex justify-between items-center">
 
-        <div className="my-2 details text-base"> Show <span className="text-lg font-semibold text-red-600">{filteredDatas.length}</span> entries of <span className="text-lg font-bold text-yellow-600">{initialDatas.length}</span></div>
+        <div className="details my-2 text-base"> Show <span className="text-lg font-semibold text-red-600">{filteredDatas.length}</span> entries of <span className="text-lg font-bold text-yellow-600">{initialDatas.length}</span></div>
 
       
         <Pagination counterPages={counterPages} pageIndex={pageIndex} setPageIndex={setPageIndex} />
