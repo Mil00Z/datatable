@@ -1,18 +1,18 @@
-interface PaginationProps {
+export interface PaginationProps {
   counterPages: number[];
   pageIndex: number;
   setPageIndex: Function
 }
+
 const Pagination = ({counterPages,pageIndex,setPageIndex}: PaginationProps) =>  {
 
  
-  function handleClick(pageNumber:string){ {
+  function handleClick(pageNumber:number){ {
 
-    setPageIndex(parseInt(pageNumber));
+    setPageIndex(pageNumber);
    
   }
 }
-
 
 return (
   <>
