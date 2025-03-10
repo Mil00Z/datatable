@@ -8,39 +8,49 @@ A simple Clone of Datable JQuery Plugin for React applications.
 
 ```json
 {
-  "name": "milooz-datatable-react-plugin", 
+  "name": "milooz-datatable",
+  "private": false,
   "version": "0.1.0",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "files": [
-    "dist"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts":{
-  "dev": "vite",
-    "build": "vite build",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
-
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.9",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.9"
+  },
   "peerDependencies": {
     "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
-  "dependencies": {
-  "tailwind": "^2.2.19"
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.2.0"
+  }
 }
-}
+
 ```
 
 ## Installation
 
 ```bash
-npm install milooz-datatable-react-plugin
+npm install milooz-datatable
 OR
-pnpm install milooz-datatable-react-plugin
+pnpm install milooz-datatable
 ```
 
 ## Usage
@@ -52,7 +62,7 @@ mkdir datas
 #### Import Datatable Component & Datas File
 ```jsx
 //App.jsx
-import { Datatable } from 'milooz-datatable-react-plugin';
+import { Datatable } from 'milooz-datatable';
 import mock from '../datas/mock.json';
 
 function App() {
@@ -70,30 +80,6 @@ function App() {
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | mock | array | initialDatas | Datasets to display |
-
-
-#### Sub Component in Plugin ?? => Pagination 
-```jsx
-//file.jsx
-
-function SubComponent() {
-  return (
-    <Pagination 
-      counterPages={counterPages} 
-      pageIndex={pageIndex} 
-      setPageIndex={setPageIndex} 
-    />
-  );
-}
-```
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| counterPages | array | [] | Array of Pagination Element |
-| PageIndex | number | 1 | Current Index of Page |
-| setPageIndex | function |  ❌  | Setter of Page Index |
 
 
 #### UI Initials Settings
@@ -158,9 +144,7 @@ thead th{
   background:var(--main-color);
   color:var(--white-color);
 }
-
 ```
 
 ## License
-
 MIT

@@ -1,7 +1,9 @@
 {
-  "name": "datatables",
-  "private": true,
-  "version": "0.0.0",
+  "name": "milooz-datatable",
+  "private": false,
+  "version": "0.1.0",
+  "description": "Un plugin de tableau de données pour React",
+  "keywords": ["react", "datatable", "plugin"],
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,6 +16,10 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^4.0.9"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
