@@ -2,6 +2,15 @@
 
 A simple Clone of Datable JQuery Plugin for React applications.
 
+## Installation
+
+```bash
+npm install milooz-datatable
+  OR
+pnpm install milooz-datatable
+```
+
+
 ## Creation
 
 #### package.json
@@ -10,8 +19,18 @@ A simple Clone of Datable JQuery Plugin for React applications.
 {
   "name": "milooz-datatable",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "description": "Un plugin de tableau de données pour React",
+  "keywords": ["react", "datatable", "plugin"],
   "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist","src/datas/mock.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -43,14 +62,6 @@ A simple Clone of Datable JQuery Plugin for React applications.
   }
 }
 
-```
-
-## Installation
-
-```bash
-npm install milooz-datatable
-OR
-pnpm install milooz-datatable
 ```
 
 ## Usage
