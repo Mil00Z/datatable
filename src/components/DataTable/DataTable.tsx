@@ -2,18 +2,19 @@ import {useState,useEffect} from 'react';
 
 import Pagination from '../../components/Pagination/Pagination';
 
-interface DataTableProps {
-  /** Datasets to manage*/ 
+
+export interface DataTableProps {
   initialDatas: object[];
 }
+
 
 const DataTable = ({initialDatas} : DataTableProps) => {
 
   const [filteredDatas,setFilteredDatas] = useState(initialDatas);
-  const [sortingDatas,setSortingDatas] = useState('asc');
-  const [elementsPerPage,setElementsPerPage] = useState(initialDatas.length);
-  const [counterPages,setCounterPages] = useState([]);
-  const [pageIndex, setPageIndex] = useState(1);
+  const [sortingDatas,setSortingDatas] = useState<string>('asc');
+  const [elementsPerPage,setElementsPerPage] = useState<number>(initialDatas.length);
+  const [counterPages,setCounterPages] = useState<number[]>([]);
+  const [pageIndex, setPageIndex] = useState<number>(1);
  
 
 
@@ -31,7 +32,6 @@ const DataTable = ({initialDatas} : DataTableProps) => {
     //Record Array of Pagination
     setCounterPages(listOfPages(entry))
     
-  
   }
 
 // Create List of Pagination
@@ -53,24 +53,31 @@ const DataTable = ({initialDatas} : DataTableProps) => {
     return links;
   }
 
-// Filter by Lexical Order
+ 
+// Filter by Lexical Order*
+
+  interface OrderDatas {
+    [key: string] : string,
+  }
+
   function lexicalFilter(value:string) {
     
     let sortedDatas;
 
     if (sortingDatas === 'asc') {
       sortedDatas = [...filteredDatas].sort((a, b) => {
-        return a[value].localeCompare(b[value], 'fr');
+        return (a as OrderDatas)[value].localeCompare((b as OrderDatas)[value], 'fr');
       });
       setSortingDatas('desc');
     } else {
       sortedDatas = [...filteredDatas].sort((a, b) => {
-        return b[value].localeCompare(a[value], 'fr');
+        return (b as OrderDatas)[value].localeCompare((a as OrderDatas)[value], 'fr');
       });
       setSortingDatas('asc');
     }
     setFilteredDatas(sortedDatas);
   }
+
 
 // Global Search by Lexical
   function globalSearch(input:string){
@@ -108,7 +115,6 @@ const DataTable = ({initialDatas} : DataTableProps) => {
 
   return(
     <>
-      
       <div className="top flex items-center py-2 my-4">
       
         <div className="numbering flex flex-row items-center">
@@ -180,7 +186,6 @@ const DataTable = ({initialDatas} : DataTableProps) => {
 
       
         <Pagination counterPages={counterPages} pageIndex={pageIndex} setPageIndex={setPageIndex} />
-      
       </div>
 
     </>
