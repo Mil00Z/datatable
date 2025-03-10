@@ -1,7 +1,5 @@
-
 import reactLogo from './assets/react.svg';
 import mock from './datas/mock.json';
-
 
 import DataTable from './components/DataTable/DataTable';
 
@@ -10,7 +8,6 @@ import './App.css';
 
 function App() {
  
-
   return (
     <>
 
