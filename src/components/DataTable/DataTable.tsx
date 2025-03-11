@@ -10,7 +10,8 @@ export interface DataTableProps {
 
 const DataTable = ({initialDatas} : DataTableProps) => {
 
-  const [filteredDatas,setFilteredDatas] = useState(initialDatas);
+  const [searchedDatas,setSearchedDatas] = useState(initialDatas);
+  const [filteredDatas,setFilteredDatas] = useState<object[]>([]);
   const [sortingDatas,setSortingDatas] = useState<string>('asc');
   const [elementsPerPage,setElementsPerPage] = useState<number>(initialDatas.length);
   const [counterPages,setCounterPages] = useState<number[]>([]);
@@ -37,7 +38,7 @@ const DataTable = ({initialDatas} : DataTableProps) => {
 // Create List of Pagination
   function listOfPages(value:number){
 
-    let numberOfPages = initialDatas.length / value;
+    let numberOfPages = searchedDatas.length / value;
 
     if(numberOfPages % value > 0){
 
@@ -65,17 +66,17 @@ const DataTable = ({initialDatas} : DataTableProps) => {
     let sortedDatas;
 
     if (sortingDatas === 'asc') {
-      sortedDatas = [...filteredDatas].sort((a, b) => {
+      sortedDatas = [...searchedDatas].sort((a, b) => {
         return (a as OrderDatas)[value].localeCompare((b as OrderDatas)[value], 'fr');
       });
       setSortingDatas('desc');
     } else {
-      sortedDatas = [...filteredDatas].sort((a, b) => {
+      sortedDatas = [...searchedDatas].sort((a, b) => {
         return (b as OrderDatas)[value].localeCompare((a as OrderDatas)[value], 'fr');
       });
       setSortingDatas('asc');
     }
-    setFilteredDatas(sortedDatas);
+    setSearchedDatas(sortedDatas);
   }
 
 
@@ -83,33 +84,40 @@ const DataTable = ({initialDatas} : DataTableProps) => {
   function globalSearch(input:string){
 
   
-    if(filteredDatas.length === 0 || input === ''){
+    if(searchedDatas.length === 0 || input === ''){
 
-      setFilteredDatas(initialDatas);
-
+      setSearchedDatas(initialDatas);
+     
     } else {
 
-      const filteredSearch = filteredDatas.filter((row) => {
+      const globalSearchedDatas = searchedDatas.filter((row) => {
   
         return Object.values(row).some((value) =>{
           return value.toLowerCase().includes(input.toLowerCase());
         })
       })
   
-      setFilteredDatas(filteredSearch);
+      setSearchedDatas(globalSearchedDatas);
     }
     
   }
+
 
   // Trigger Pagination Calcul 
   useEffect(() => {
 
     //Update Local State of Datas
     setFilteredDatas(() => {
-      return initialDatas.slice((pageIndex - 1) * elementsPerPage, elementsPerPage * pageIndex);
+
+      const start = (pageIndex - 1) * elementsPerPage;
+      let end = pageIndex * elementsPerPage;
+
+      return searchedDatas.slice(start, end);
+
     });
 
-  }, [elementsPerPage, pageIndex]);
+  }, [elementsPerPage, pageIndex,searchedDatas]);
+
 
 
 
@@ -129,7 +137,7 @@ const DataTable = ({initialDatas} : DataTableProps) => {
               <option value="10">10</option>
               <option value="25">20</option>
           </select>
-          <label htmlFor="dt-length-0" className="px-4 text-black font-semibold text-base"> {filteredDatas.length > 1 ? 'entries' : 'entry'} per page</label>
+          <label htmlFor="dt-length-0" className="px-4 text-black font-semibold text-base"> {searchedDatas.length > 1 ? 'entries' : 'entry'} per page</label>
           
         </div>
 
@@ -151,7 +159,7 @@ const DataTable = ({initialDatas} : DataTableProps) => {
           </thead>
           <tbody>
 
-            {filteredDatas.length > 0 ? (filteredDatas.map((row, index) => {
+            {initialDatas.length > 0 ? (filteredDatas.map((row, index) => {
                   return (
                     <tr key={`row-${index}`} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                       
@@ -182,7 +190,7 @@ const DataTable = ({initialDatas} : DataTableProps) => {
 
       <div className="bottom my-2 flex justify-between items-center">
 
-        <div className="details my-2 text-base"> Show <span className="text-lg font-semibold text-red-600">{filteredDatas.length}</span> entries of <span className="text-lg font-bold text-yellow-600">{initialDatas.length}</span></div>
+        <div className="details my-2 text-base"> Show <span className="text-lg font-semibold text-red-600">{searchedDatas.length}</span> entries of <span className="text-lg font-bold text-yellow-600">{initialDatas.length}</span></div>
 
       
         <Pagination counterPages={counterPages} pageIndex={pageIndex} setPageIndex={setPageIndex} />
