@@ -1,17 +1,32 @@
 import {useState,useEffect} from 'react';
 
+
 import Pagination from '../../components/Pagination/Pagination';
 
 
-export interface DataTableProps {
-  initialDatas: object[];
+export type Employee = {
+  firstName: string;
+  lastName: string;
+  dateBirth: string;
+  city: string;
+  department: string;
+  startDate: string;
+  street: string;
+  zipCode: string;
+  id?: string;
 }
+
+
+export interface DataTableProps {
+  initialDatas: Employee[];
+}
+
 
 
 const DataTable = ({initialDatas} : DataTableProps) => {
 
-  const [searchedDatas,setSearchedDatas] = useState<object[]>(initialDatas);
-  const [filteredDatas,setFilteredDatas] = useState<object[]>([]);
+  const [searchedDatas,setSearchedDatas] = useState<Employee[]>(initialDatas);
+  const [filteredDatas,setFilteredDatas] = useState<Employee[]>([]);
   const [sortingDatas,setSortingDatas] = useState<string>('asc');
   const [elementsPerPage,setElementsPerPage] = useState<number>(initialDatas.length);
   const [counterPages,setCounterPages] = useState<number[]>([]);
@@ -56,7 +71,7 @@ const DataTable = ({initialDatas} : DataTableProps) => {
   }
 
  
-// Filter by Lexical Order*
+// Filter by Lexical Order
 
   interface OrderDatas {
     [key: string] : string,
@@ -141,8 +156,7 @@ const DataTable = ({initialDatas} : DataTableProps) => {
               <option value="25">20</option>
           </select>
           <label htmlFor="dt-length-0" className="px-4 text-black font-semibold text-base"> {searchedDatas.length > 1 ? 'entries' : 'entry'} per page</label>
-          <label htmlFor="dt-length-0" className="px-4 text-black font-semibold text-base"> {searchedDatas.length > 1 ? 'entries' : 'entry'} per page</label>
-          
+         
         </div>
 
         <div className="searching flex flex-row items-center ml-auto">
@@ -195,10 +209,10 @@ const DataTable = ({initialDatas} : DataTableProps) => {
       <div className="bottom my-2 flex justify-between items-center">
 
         <div className="details my-2 text-base"> Show <span className="text-lg font-semibold text-red-600">{searchedDatas.length}</span> entries of <span className="text-lg font-bold text-yellow-600">{initialDatas.length}</span></div>
-        <div className="details my-2 text-base"> Show <span className="text-lg font-semibold text-red-600">{searchedDatas.length}</span> entries of <span className="text-lg font-bold text-yellow-600">{initialDatas.length}</span></div>
+        
 
-      
         <Pagination counterPages={counterPages} pageIndex={pageIndex} setPageIndex={setPageIndex} />
+
       </div>
 
     </>
