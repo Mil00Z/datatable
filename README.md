@@ -2,7 +2,14 @@
 
 A simple Clone of Datable JQuery Plugin for React applications.
 
-## Installation
+[![forthebadge](https://forthebadge.com/images/badges/made-with-react.svg)](https://forthebadge.com) 
+
+[![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)](https://forthebadge.com)
+
+## 🛒 1.Installation
 
 ```bash
 npm install milooz-datatable
@@ -11,23 +18,33 @@ pnpm install milooz-datatable
 ```
 
 
-## Creation
+## 🎯 2.Settings
 
-#### package.json
+#### Global Settings
 
 ```json
 {
   "name": "milooz-datatable",
   "private": false,
-  "version": "0.1.1",
-  "description": "Un plugin de tableau de données pour React",
-  "keywords": ["react", "datatable", "plugin"],
-  "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "files": [
-    "dist","src/datas/mock.json"
+  "version": "0.1.2",
+  "description": "Un plugin d'affichage de tableau de données pour React",
+  "keywords": [
+    "react",
+    "typescript",
+    "component",
+    "ui",
+    "datatable",
+    "newbie"
   ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "files": [
+    "dist",
+    "src/datas/mock.json"
+  ],
+  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -37,15 +54,10 @@ pnpm install milooz-datatable
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.0.9",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwindcss": "^4.0.9"
-  },
   "peerDependencies": {
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -58,46 +70,65 @@ pnpm install milooz-datatable
     "globals": "^15.15.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
+    "@tailwindcss/vite": "^4.0.0",
     "vite": "^6.2.0"
   }
 }
-
 ```
 
-## Usage
+## 📚 3.Usage
 
-#### Create Datas Folder in `myProject\src\`
+### Create Data file in `myProject\src\`
 ```bash
-mkdir datas
-```
-#### Import Datatable Component & Datas File
-```jsx
-//App.jsx
-import { Datatable } from 'milooz-datatable';
-import mock from '../datas/mock.json';
-
-function App() {
-  return (
-    <h1 className="text-3xl text-black font-bold text-center flex justify-center">
-        Simple Clone of DataTables
-    </h1>
-    <DataTable initialDatas={mock} />
-  );
-}
+touch mock.json
 ```
 
-## Props
+#### Exemple `mock.json`
+```json
+[
+  {
+    "firstName": "Aurélie",
+    "lastName": "Dupont",
+    "dateBirth": "1995-02-12",
+    "city": "Lyon",
+    "department": "Marketing",
+    "id": ":r1:",
+    "startDate": "2023-05-15",
+    "street": "Rue des Écoles",
+    "zipCode": "69000"
+  },
+  {
+    "firstName": "Benoît",
+    "lastName": "Voyou",
+    "dateBirth": "1988-08-23",
+    "city": "Bordeaux",
+    "department": "Engineering",
+    "id": ":r2:",
+    "startDate": "20221-11-01",
+    "street": "Boulevard de la République",
+    "zipCode": "33000"
+  },
+  {
+    "firstName": "Camille",
+    "lastName": "Lefebvre",
+    "dateBirth": "1998-04-20",
+    "city": "Bordeaux",
+    "department": "IT",
+    "id": ":r3:",
+    "startDate": "2021-07-01",
+    "street": "Rue de la Gironde",
+    "zipCode": "33000"
+  }
+]
+```
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| mock | array | initialDatas | Datasets to display |
+### Import Tailwind Directives in main file css
 
-
-#### UI Initials Settings
 ```css
+ /* App.css */
 @import "tailwindcss";
 
-/* INIT */
+/* Styles default */
 :root{
   --main-color:rgb(202 138 4);
   --white-color:#FFF;
@@ -157,5 +188,34 @@ thead th{
 }
 ```
 
-## License
+Vous pouvez appliquer des classes Tailwind CSS aux élèments de ce plugin pour personnaliser leur style.
+
+### Import Datatable Component & Data File
+```jsx
+//App.jsx
+import { Datatable } from 'milooz-datatable';
+import mock from './mock.json';
+
+function App() {
+  return (
+    <h1 className="text-3xl text-black font-bold text-center flex justify-center">
+        Simple Clone of DataTables
+    </h1>
+    <DataTable initialDatas={mock} />
+  );
+}
+```
+
+## 💡 4.Props
+
+| Prop | Type | Default | Description | Required |
+|------|------|---------|-------------|--------|
+| mock | array | initialDatas | Datasets to display | yes
+
+
+
+## 📒 5.More informations
+* Consultez la [documentation de Tailwind CSS](https://tailwindcss.com/docs/installation) pour plus d'informations.
+
+## 📖 License
 MIT
