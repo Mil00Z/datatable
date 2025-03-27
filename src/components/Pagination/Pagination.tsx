@@ -1,7 +1,7 @@
 export interface PaginationProps {
   counterPages: number[];
   pageIndex: number;
-  setPageIndex: Function
+  setPageIndex: (pageNumber: number) => void ;
 }
 
 const Pagination = ({counterPages,pageIndex,setPageIndex}: PaginationProps) =>  {
