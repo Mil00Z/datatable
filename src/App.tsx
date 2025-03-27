@@ -1,13 +1,18 @@
 import reactLogo from './assets/react.svg';
+
 import mock from './datas/mock.json';
 
+import { Employee } from './components/DataTable/DataTable';
 import DataTable from './components/DataTable/DataTable';
+
 
 import './App.css';
 
+const mockData: Employee[] = mock;
+
 
 function App() {
- 
+
   return (
     <>
 
@@ -17,8 +22,8 @@ function App() {
         <img src={reactLogo} alt="Logo" />
       </h1>
       
-      <DataTable initialDatas={mock}/>
-    
+      <DataTable initialDatas={mockData}/>
+      
     </>
   )
 }
